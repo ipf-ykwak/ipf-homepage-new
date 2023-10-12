@@ -1,9 +1,9 @@
 import React, { ReactEventHandler } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import colors from '../layouts/colors';
 import Typography from '../layouts/Typography';
-import { high_resolution, responsive } from '../layouts/responsive';
+import { high_resolution } from '../layouts/responsive';
 
 import arrow_right from '../assets/images/arrow_right.png';
 import arrow_right_2x from '../assets/images/arrow_right@2x.png';
@@ -19,15 +19,11 @@ type Props = {
   children: any;
   onClick?: ReactEventHandler;
   style?: React.CSSProperties;
+  className?: string;
   filename?: string;
-  footer?: boolean;
 };
 
-type ButtonWrapperProps = {
-  footer?: boolean;
-};
-
-const ButtonWrapper = styled.div<ButtonWrapperProps>`
+const ButtonWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -36,36 +32,30 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
   height: 53px;
 
   white-space: nowrap;
+`;
 
-  &:hover a {
+const ButtonStyled = styled.button<{ hasIcon: boolean }>`
+  background-color: ${colors.primary};
+  &:hover {
     background-color: #f16a4f;
+
+    ${({ hasIcon }) =>
+      hasIcon &&
+      `
     padding-right: 96px;
 
     :after {
       left: 56px;
       transition: left 0.1s ease-in-out;
-    }
+    }    
+    `}
   }
 
-  &:active a {
+  &:active {
     background-color: #d7482b;
   }
-  ${(props) =>
-    props.footer &&
-    css`
-      @media ${responsive.conditionForTablet} {
-        margin-left: 4rem;
-        transition: margin-left 0.1s ease-in-out;
-        &:hover {
-          margin-left: 2.4rem;
-        }
-      }
-    `}
-`;
 
-const ButtonComponent = styled.a`
-  background-color: ${colors.primary};
-  padding: 16px 80px 16px 24px;
+  padding: ${({ hasIcon }) => (hasIcon ? '16px 80px 16px 24px' : '16px 24px')};
   width: 100%;
   height: 100%;
   transition: all 0.1s ease-in-out;
@@ -80,11 +70,7 @@ const ButtonComponent = styled.a`
   ${Typography('body', 1.4, 700)};
 `;
 
-type IconProps = {
-  icon: ThemeType;
-};
-
-const Icon = styled.span`
+const Icon = styled.span<{ icon: ThemeType }>`
   position: absolute;
   width: 16px;
   height: 16px;
@@ -93,40 +79,45 @@ const Icon = styled.span`
 
   cursor: pointer;
 
-  background-image: ${(props: IconProps) =>
-    props.icon === 'arrow' ? `url(${arrow_right})` : `url(${download})`};
+  background-image: ${({ icon }) =>
+    icon === 'arrow' ? `url(${arrow_right})` : `url(${download})`};
   background-repeat: no-repeat;
   background-size: cover;
 
   @media ${high_resolution} {
-    background-image: ${(props: IconProps) =>
-      props.icon === 'arrow'
-        ? `url(${arrow_right_2x})`
-        : `url(${download_2x})`};
+    background-image: ${({ icon }) =>
+      icon === 'arrow' ? `url(${arrow_right_2x})` : `url(${download_2x})`};
   }
 `;
 
 function Button({
-  icon = 'arrow',
+  icon,
   href,
   target,
   onClick,
   children,
-  style,
   filename = '',
-  footer = false,
+  ...styleProps
 }: Props) {
+  const hasIcon = !!icon;
+  const isLink = typeof href === 'string';
+
   return (
-    <ButtonWrapper style={style} footer={footer}>
-      <ButtonComponent
-        href={href}
-        target={target}
+    <ButtonWrapper {...styleProps}>
+      <ButtonStyled
+        {...(isLink && {
+          as: 'a',
+          href,
+          target,
+          download: filename,
+        })}
         onClick={onClick}
-        download={filename}
+        hasIcon={hasIcon}
       >
         {children}
-      </ButtonComponent>
-      <Icon icon={icon} />
+      </ButtonStyled>
+
+      {hasIcon && <Icon icon={icon} />}
     </ButtonWrapper>
   );
 }
