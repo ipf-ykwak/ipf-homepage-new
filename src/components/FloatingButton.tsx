@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { useTranslation } from 'react-i18next';
 import Button from './Button';
 import { responsive } from '../layouts/responsive';
 
 const FloatingButtonContainer = styled.div`
   position: fixed;
   right: 2rem;
-  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.16);
 
   @media ${responsive.conditionForTablet} {
     right: calc((100% - 70.4rem) / 2);
@@ -19,6 +20,8 @@ const FloatingButtonContainer = styled.div`
 `;
 
 const FloatingButton = () => {
+  const { t } = useTranslation();
+
   const [bottom, setBottom] = useState(2);
 
   const checkFooterHeight = () => {
@@ -52,9 +55,7 @@ const FloatingButton = () => {
 
   return (
     <FloatingButtonContainer style={{ bottom: `${bottom}rem` }}>
-      <Button href="https://iportfolio.oopy.io/career" target="_blank">
-        우리가 일하는 방법
-      </Button>
+      <Button>{t('TEXT-16')}</Button>
     </FloatingButtonContainer>
   );
 };
