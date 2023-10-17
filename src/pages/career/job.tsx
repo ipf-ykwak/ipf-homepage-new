@@ -5,15 +5,16 @@ import Skeleton from 'react-loading-skeleton';
 
 import Typography from '../../layouts/Typography';
 import colors from '../../layouts/colors';
+import { responsive } from '../../layouts/responsive';
 
 import { getAllJobs, getJobDetail } from '../../api/getJobsData';
 
 import Header from '../../components/Header';
 import HelmetComponent from '../../components/HelmetComponent';
 import Container from '../../components/Container';
-import Button from '../../components/Button';
 import Footer from '../../containers/Footer';
 import { JobItemDataType } from '../../components/JobItem';
+import JobApplyPanel from '../../components/JobApplyPanel';
 
 type Props = {
   location: any;
@@ -28,10 +29,14 @@ type JobDetailType = {
 };
 
 const ContainerStyled = styled(Container)`
-  width: 100%;
   flex-direction: column;
 
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+`;
+
+const Layout = styled.div`
+  display: flex;
+  gap: 3rem;
 `;
 
 const Heading1 = styled.h2`
@@ -112,8 +117,18 @@ const CircleList = styled.ul`
   white-space: pre-line;
 `;
 
-const ButtonWrapper = styled.div`
-  margin-top: 6.4rem;
+const FooterWrapper = styled.div`
+  .footer {
+    padding-bottom: 21.8rem;
+
+    @media ${responsive.conditionForTablet} {
+      padding-bottom: 25.8rem;
+    }
+
+    @media ${responsive.conditionForDesktop} {
+      padding-bottom: 12rem;
+    }
+  }
 `;
 
 function displayJobDetail(jobsDetailData: [JobDetailType]) {
@@ -225,21 +240,26 @@ export default function Job({ location }: Props) {
         pageLink={`/career/job/?id=${urlParams.get('id')}`}
       />
       <Header>Careers</Header>
+
       <ContainerStyled
         data-sal="slide-up"
         data-sal-duration="1000"
         data-sal-easing="ease"
       >
-        {jobsData[0].depth != 0
-          ? displayJobDetail(jobsData)
-          : displayJobDetailSkeleton()}
-        <ButtonWrapper>
-          <Button href="mailto:jobs@iportfolio.co.kr" icon="arrow">
-            지원하기
-          </Button>
-        </ButtonWrapper>
+        <Layout>
+          <div>
+            {jobsData[0].depth != 0
+              ? displayJobDetail(jobsData)
+              : displayJobDetailSkeleton()}
+          </div>
+
+          <JobApplyPanel />
+        </Layout>
       </ContainerStyled>
-      <Footer />
+
+      <FooterWrapper>
+        <Footer className="footer" />
+      </FooterWrapper>
     </>
   );
 }
