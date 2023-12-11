@@ -140,7 +140,6 @@ const Wrapper = styled.div`
 const BenefitItemButton = styled.button`
   width: fit-content;
   max-width: 100%;
-  height: 6.9rem;
 
   border: none;
   border-radius: 1.6rem;
@@ -152,7 +151,10 @@ const BenefitItemButton = styled.button`
 
   display: flex;
   justify-content: center;
-  white-space: nowrap;
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-align: left;
 
   ${Typography('body', 1.4, 700)};
 
@@ -200,7 +202,7 @@ export default function BenefitSection() {
       setCurrentModal({
         show: true,
         data: {
-          key: key,
+          key,
           title: (WelfareData as any)[key].title,
           description: (WelfareData as any)[key].description,
           img: (WelfareData as any)[key].img,
@@ -220,7 +222,7 @@ export default function BenefitSection() {
       setCurrentModal({
         show: true,
         data: {
-          key: key,
+          key,
           title: (WelfareData as any)[key].title,
           description: (WelfareData as any)[key].description,
           img: (WelfareData as any)[key].img,
@@ -245,15 +247,15 @@ export default function BenefitSection() {
         data-sal-easing="ease"
       >
         {Object.keys(WelfareData).map(function (key, index) {
-          if (key == '1' && language === 'en') {
-            return;
+          if (key === '1' && language === 'en') {
+            return null;
           }
           return (
             <BenefitItemButton
               key={key}
               onClick={
                 language === 'ko'
-                  ? () => handleOnClick(parseInt(key))
+                  ? () => handleOnClick(parseInt(key, 10))
                   : () => {}
               }
               lang={language}
