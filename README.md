@@ -9,7 +9,7 @@ master - Contains the static files after gatsby build. Used to make it into gith
 
 ## Scripts
 
-### `npm start`
+### `yarn start`
 
 Runs the website in the development mode.\
 Open [http://localhost:7001](http://localhost:7001) to view it in the browser.
@@ -17,15 +17,15 @@ Open [http://localhost:7001](http://localhost:7001) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm run build`
+### `yarn build`
 
 Builds the app for production to the `public` folder.
 
-### `npm run deploy`
+### `yarn deploy`
 
 Builds the app and deploys to master branch in ipf-dev/ipf-homepage-new repository.
 
-### `npm run clean`
+### `yarn clean`
 
 Gatsby cache clean script.
 (locales 폴더 내 변경사항이 있을때 사용)
