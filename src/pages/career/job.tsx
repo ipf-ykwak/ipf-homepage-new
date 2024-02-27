@@ -207,6 +207,7 @@ export default function Job({ location }: Props) {
     if (location.state) {
       getJobDetail(location.state.details, signal)
         .then((resultData) => {
+          console.log(resultData);
           setJobsData(resultData);
         })
         .catch(() => setJobsData([emptyJobsData]));
