@@ -72,7 +72,7 @@ const ProductImgStyled = styled(ProductImg)`
 `;
 
 const PopReaderServiceList = [
-  { key: 'Web', link: 'https://www.popreader.cn/' },
+  { key: 'WebImage' },
   { key: 'AppleImage' },
   { key: 'AndroidImage' },
 ];

@@ -85,6 +85,11 @@ const YouTube = styled.a`
   background-position: -18rem 0;
 `;
 
+const WebImage = styled.div`
+  ${commonStyle};
+  background-position: 0 0;
+`;
+
 const AppleImage = styled.div`
   ${commonStyle};
   background-position: -6rem 0;
@@ -113,6 +118,8 @@ export default function Services({ serviceList }: Props) {
             return <Android {...attribute} />;
           case 'YouTube':
             return <YouTube {...attribute} />;
+          case 'WebImage':
+            return <WebImage key={attribute.key} />;
           case 'AppleImage':
             return <AppleImage key={attribute.key} />;
           case 'AndroidImage':
