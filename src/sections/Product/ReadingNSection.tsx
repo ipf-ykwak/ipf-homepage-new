@@ -45,7 +45,7 @@ const DescriptionStyled = styled(Description)`
 const Logo = styled.span`
   margin-bottom: 2.4rem;
 
-  width: 24.2rem;
+  width: 19rem;
   height: 4rem;
 
   background-image: url(${img_logo_readingn});
