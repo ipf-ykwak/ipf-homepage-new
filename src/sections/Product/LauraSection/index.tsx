@@ -50,6 +50,10 @@ const DescriptionStyled = styled(Description)`
   width: 100%;
   margin: 0 0 2.4rem;
 
+  @media ${responsive.conditionForTablet} {
+    padding-right: 4rem;
+  }
+
   @media ${responsive.conditionForDesktop} {
     width: 38.1rem;
     margin-bottom: 4rem;
@@ -69,13 +73,13 @@ const ProductImgStyled = styled(ProductImg)`
 
   @media ${responsive.conditionForTablet} {
     width: 40rem;
-    height: 25.1rem;
+    height: 25rem;
     background-size: contain;
   }
 
   @media ${responsive.conditionForDesktop} {
-    width: 43.4rem;
-    height: 27.2rem;
+    width: 60rem;
+    height: 37.6rem;
   }
 `;
 

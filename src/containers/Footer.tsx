@@ -128,7 +128,6 @@ export default function Footer({ ...styleProps }: FooterProps) {
       </LicenseContainer>
       <LinkContainer>
         <FacebookLink href="https://www.facebook.com/ipofo" target="_blank" />
-        <NaverPostLink href="https://post.naver.com/ipofo" target="_blank" />
       </LinkContainer>
       <DownloadButton
         className="download-button"

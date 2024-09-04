@@ -22,7 +22,6 @@ function Home() {
       <ProductionSection />
       <NewsSection />
       <CareerSection />
-      <BettSection />
       <AwardsSection />
       <Footer />
       <NaverConnectionChannels />
