@@ -17,7 +17,7 @@ const Container = styled.div`
 
   @media ${responsive.conditionForDesktop} {
     flex-direction: row;
-    padding: 120px calc((100% - 96rem) / 2);
+    padding: 120px calc((100% - 104rem) / 2);
   }
 `;
 
